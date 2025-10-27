@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from "react";
+import { api } from "../services/api";
+
+export default function Teachers() {
+  const [teachers, setTeachers] = useState([]);
+  const [form, setForm] = useState({ nome: "", disciplina: "", contato: ""});
+
+  useEffect(() => {
+    api.getTeachers().then(setTeachers);
+  }, []);
+
+  async function handleAdd(e) {
+    e.preventDefault();
+    const novo = await api.addTeacher(form);
+    setTeachers(prev => [...prev, novo]);
+    setForm({ nome: "", disciplina: "", contato: ""});
+  }
+
+  return (
+    <div>
+      <div className="card">
+        <h3>Cadastro de Professores</h3>
+        <form onSubmit={handleAdd}>
+          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:8}}>
+            <input className="input" placeholder="Nome" value={form.nome} onChange={e=>setForm({...form,nome:e.target.value})}/>
+            <input className="input" placeholder="Disciplina" value={form.disciplina} onChange={e=>setForm({...form,disciplina:e.target.value})}/>
+            <input className="input" placeholder="Contato" value={form.contato} onChange={e=>setForm({...form,contato:e.target.value})}/>
+          </div>
+          <div style={{marginTop:8}}>
+            <button className="button" type="submit">Adicionar professor</button>
+          </div>
+        </form>
+      </div>
+
+      <div className="card">
+        <h3>Lista de Professores</h3>
+        <table className="table">
+          <thead><tr><th>Nome</th><th>Disciplina</th><th>Contato</th></tr></thead>
+          <tbody>
+            {teachers.map(t => (
+              <tr key={t.id}><td>{t.nome}</td><td>{t.disciplina}</td><td className="small-muted">{t.contato}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../lib/api";
 
 export default function Grades() {
   const [students, setStudents] = useState([]);
   const [form, setForm] = useState({ studentId:"", disciplina:"", nota: "" });
 
   useEffect(() => {
-    api.getStudents().then(setStudents);
+    api.getAllStudents().then(setStudents);
   }, []);
 
   async function handleAdd(e) {

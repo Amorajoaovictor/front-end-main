@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
-import { connect } from "../services/websocket";
+import { api } from "../lib/api";
+import { connect } from "../lib/websocket";
 
 export default function ParentsPortal() {
   const [studentId, setStudentId] = useState("");

@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../lib/api";
 
 export default function Reports() {
   const [report, setReport] = useState(null);

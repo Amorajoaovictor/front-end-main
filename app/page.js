@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import Dashboard from "./components/Dashboard";
-import Students from "./components/Students";
-import Teachers from "./components/Teachers";
-import Attendance from "./components/Attendance";
-import Grades from "./components/Grades";
-import Reports from "./components/Reports";
-import ParentsPortal from "./components/ParentsPortal";
+'use client';
 
-export default function App() {
+import { useState } from "react";
+import Navbar from "../components/Navbar";
+import Dashboard from "../components/Dashboard";
+import Students from "../components/Students";
+import Teachers from "../components/Teachers";
+import Attendance from "../components/Attendance";
+import Grades from "../components/Grades";
+import Reports from "../components/Reports";
+import ParentsPortal from "../components/ParentsPortal";
+
+export default function Home() {
   const [view, setView] = useState("dashboard");
 
   function renderView() {

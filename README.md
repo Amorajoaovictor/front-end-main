@@ -1,4 +1,4 @@
-﻿# DistriSchool - Mock Frontend (React)
+# DistriSchool - Mock Frontend (React)
 
 Aplicação frontend mock para o repositório unifor-online/distrischool.
 

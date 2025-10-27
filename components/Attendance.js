@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../lib/api";
 
 export default function Attendance() {
   const [students, setStudents] = useState([]);
   const [registro, setRegistro] = useState({ studentId: "", present: true });
 
   useEffect(() => {
-    api.getStudents().then(setStudents);
+    api.getAllStudents().then(setStudents);
   }, []);
 
   async function handleRecord(e) {

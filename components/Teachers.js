@@ -1,18 +1,33 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../lib/api";
+import Pagination from "./ui/Pagination";
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
   const [form, setForm] = useState({ nome: "", disciplina: "", contato: ""});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
+  const itemsPerPage = 5;
 
   useEffect(() => {
-    api.getTeachers().then(setTeachers);
-  }, []);
+    loadTeachers(currentPage);
+  }, [currentPage]);
+
+  async function loadTeachers(page) {
+    const response = await api.getTeachers(page, itemsPerPage);
+    setTeachers(response.data);
+    setTotalPages(response.totalPages);
+    setTotal(response.total);
+  }
 
   async function handleAdd(e) {
     e.preventDefault();
     const novo = await api.addTeacher(form);
-    setTeachers(prev => [...prev, novo]);
+    // Reload the current page to show updated data
+    await loadTeachers(currentPage);
     setForm({ nome: "", disciplina: "", contato: ""});
   }
 
@@ -34,6 +49,7 @@ export default function Teachers() {
 
       <div className="card">
         <h3>Lista de Professores</h3>
+        <p className="small-muted">Total de professores: {total}</p>
         <table className="table">
           <thead><tr><th>Nome</th><th>Disciplina</th><th>Contato</th></tr></thead>
           <tbody>
@@ -42,6 +58,11 @@ export default function Teachers() {
             ))}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

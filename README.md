@@ -1,28 +1,73 @@
-# DistriSchool - Mock Frontend (React)
+# DistriSchool - Frontend (Next.js)
 
-Aplicação frontend mock para o repositório unifor-online/distrischool.
+Aplicação frontend para o repositório unifor-online/distrischool.
 
-Tecnologias:
-- React (create-react-app style)
-- Simulação de REST via src/services/api.js
-- Simulação de WebSocket via src/services/websocket.js
+## Tecnologias
 
-Funcionalidades:
-- Dashboard de gestão
-- Cadastro de alunos e professores
+- **Next.js 14** - Framework React moderno com renderização otimizada
+- **React 18** - Biblioteca para construção de interfaces
+- Simulação de REST via `lib/api.js`
+- Simulação de WebSocket via `lib/websocket.js`
+
+## Funcionalidades
+
+- Dashboard de gestão com estatísticas
+- Cadastro de alunos e professores **com paginação**
 - Registro de presenças e notas
 - Relatórios e análises (simples)
 - Portal para pais
 - Notificações em tempo real (mock)
 
-Como rodar:
-1. Crie a pasta do projeto e coloque os arquivos a seguir.
-2. Rode `npm install`
-3. Rode `npm start`
+## Estrutura do Projeto
 
-Próximos passos e integração com backend real:
-- Substituir src/services/api.js por chamadas reais para o backend Spring (REST).
-- Substituir src/services/websocket.js por uma implementação WebSocket real (p.ex. usando WebSocket API ou socket.io).
-- Adicionar autenticação, proteção de rotas, e melhorias de UI/UX.
+```
+├── app/                    # Next.js App Directory
+│   ├── layout.js          # Layout raiz
+│   ├── page.js            # Página principal
+│   └── globals.css        # Estilos globais
+├── components/            # Componentes React
+│   ├── ui/               # Componentes reutilizáveis (Pagination)
+│   ├── Dashboard.js
+│   ├── Students.js       # Com paginação
+│   ├── Teachers.js       # Com paginação
+│   └── ...
+├── lib/                   # Utilitários e serviços
+│   ├── api.js            # API mock com suporte a paginação
+│   └── websocket.js      # WebSocket mock
+└── next.config.js         # Configuração Next.js
+```
 
-Observação: Este é um protótipo simples para demonstração e integração inicial.
+## Como rodar
+
+1. Clone o repositório
+2. Rode `npm install` para instalar as dependências
+3. Rode `npm run dev` para iniciar o servidor de desenvolvimento
+4. Acesse http://localhost:3000
+
+## Scripts disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Cria build de produção
+- `npm start` - Inicia servidor de produção
+- `npm run lint` - Executa linter
+
+## Paginação
+
+As listas de alunos e professores agora possuem paginação implementada:
+- 5 itens por página (configurável)
+- Navegação entre páginas
+- Exibição do total de registros
+- Controles de página anterior/próxima
+
+## Próximos passos e integração com backend real
+
+- Substituir `lib/api.js` por chamadas reais para o backend Spring (REST)
+- Substituir `lib/websocket.js` por uma implementação WebSocket real
+- Adicionar autenticação e proteção de rotas
+- Implementar validação de formulários
+- Adicionar testes automatizados
+- Melhorias de UI/UX
+
+## Observação
+
+Este é um protótipo para demonstração e integração inicial com mock de dados.
